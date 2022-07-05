@@ -16,4 +16,8 @@ export default gql`
     createdAt: String
     updatedAt: String
   }
+
+  type Payment {
+    foo: String
+  }
 `
