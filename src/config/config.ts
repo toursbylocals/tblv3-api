@@ -10,19 +10,19 @@ const env = process.env.NODE_ENV || 'development'
 
 const ENVS = {
   [DEV]: {
-    mongodb: `${process.env.MONGO_CLOUD_URI}/tbl_staging?retryWrites=true&w=majority`,
+    mongodb: `${process.env.MONGO_CLOUD_URI}/toursbylocals_staging?retryWrites=true&w=majority`,
     dbname: 'TBL_STAGING'
   },
   [STAGING]: {
-    mongodb: `${process.env.MONGO_CLOUD_URI}/tbl_staging?retryWrites=true&w=majority`,
+    mongodb: `${process.env.MONGO_CLOUD_URI}/toursbylocals_staging?retryWrites=true&w=majority`,
     dbname: 'TBL_STAGING'
   },
   [PROD]: {
-    mongodb: `${process.env.MONGO_CLOUD_URI}/tbl_prod?retryWrites=true&w=majority`,
+    mongodb: `${process.env.MONGO_CLOUD_URI}/toursbylocals_prod?retryWrites=true&w=majority`,
     dbname: 'TBL_PROD'
   },
   [TEST]: {
-    mongodb: `${process.env.MONGO_CLOUD_URI}/tbl_staging?retryWrites=true&w=majority`,
+    mongodb: `${process.env.MONGO_CLOUD_URI}/toursbylocals_test?retryWrites=true&w=majority`,
     dbname: 'TBL_STAGING'
   }
 }

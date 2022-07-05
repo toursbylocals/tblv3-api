@@ -1,11 +1,7 @@
 export interface IUserSchema {
-    _id: string
-    firstName: string
-    lastName: string
-    password: string
-    status: string
-    email: string
-    createdAt: string
-    location: string
-    description: string
-  }
+  _id: string
+  firstName: string
+  lastName: string
+  createdAt: string
+  updatedAt: string
+}
