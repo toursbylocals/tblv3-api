@@ -1,1 +1,2 @@
-# mytripjournal-api
+# TourByLocals Graphql API
+
