@@ -14,9 +14,9 @@ import resolvers from './resolvers'
 
 import { applyMiddleware } from 'graphql-middleware'
 //import { buildFederatedSchema } from '@apollo/federation'
-import { graphqlUploadExpress } from 'graphql-upload'
+
 import { makeExecutableSchema } from '@graphql-tools/schema'
-import { permissions } from './middleware'
+// import { permissions } from './middleware'
 
 import DataLoader from 'dataloader'
 
@@ -33,15 +33,13 @@ export const startServer = async () => {
   // )
 
   const schema = makeExecutableSchema({ typeDefs, resolvers })
-  const schemaWithMiddleware = applyMiddleware(schema, permissions)
+  const schemaWithMiddleware = applyMiddleware(schema)
 
   const server = new ApolloServer({
     schema: schemaWithMiddleware
   })
 
   await server.start()
-
-  app.use(graphqlUploadExpress())
 
   server.applyMiddleware({ app })
 
