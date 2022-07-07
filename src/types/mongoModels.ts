@@ -13,3 +13,4 @@ export interface IPaymentMethodSchema {
   description: string
   updatedAt: string
 }
+

@@ -20,3 +20,4 @@ export async function getUser(userInput: UserInput) {
     
     return found as User;
 }
+
