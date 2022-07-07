@@ -9,6 +9,7 @@ generates:
       contextType: ./other#Context
       mappers:
         User: ./mongoModels#IUserSchema
+        PaymentMethod: ./mongoModels#IPaymentMethodSchema
 
   ./graphql.schema.json:
     plugins:
