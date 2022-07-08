@@ -4,10 +4,11 @@ import { IUserSchema } from '../types/mongoModels'
 
 export const UserSchema = new Schema<IUserSchema>(
   {
-    firstName: { type: String },
+    firstName: { type: String, required: true },
     lastName: { type: String }
   },
   SchemaGlobalConfig
 )
 
 export default model<IUserSchema>('user', UserSchema)
+

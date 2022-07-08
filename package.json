@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "test": "jest --coverage",
+    "test-ci": "jest --coverage --ci --passWithNoTests --bail",
     "dev": "nodemon --exec ts-node src/index.ts",
     "build": "tsc",
     "test-watch": "jest --watchAll=true --coverage",
@@ -60,7 +60,7 @@
     "**/*.{js,jsx,ts,tsx}": [
       "yarn eslint",
       "yarn prettier --write",
-      "yarn test --watchAll=false --findRelatedTests --bail"
+      "yarn test-ci"
     ]
   },
   "dependencies": {
