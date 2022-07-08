@@ -1,7 +1,3 @@
-// import './config/config'
-
-// launchDBS()
-
 import './config/config'
 import { ApolloServer } from 'apollo-server-express'
 

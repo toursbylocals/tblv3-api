@@ -8,9 +8,8 @@ export interface IUserSchema {
 
 export interface IPaymentMethodSchema {
   _id: string
-  title: string
+  name: string
   createdAt: string
   description: string
   updatedAt: string
 }
-

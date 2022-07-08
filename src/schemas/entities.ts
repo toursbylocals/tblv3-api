@@ -8,11 +8,11 @@ export default gql`
 
   type Query {
     me(userInput: UserInput!): User!
-    getPaymentMethod(paymentMethodInput: PaymentMethodInput!): PaymentMethod!
+    paymentMethods: [PaymentMethod]!
   }
 
   type Mutation {
-    createPaymentMethod(paymentMethodInput: PaymentMethodInput!): PaymentMethod!
+    createPaymentMethod(paymentMethodName: String!): PaymentMethod!
   }
 
   type User {
@@ -24,21 +24,16 @@ export default gql`
   }
 
   input UserInput {
-    id: ID!
+    _id: ID!
     firstName: String!
     lastName: String!
   }
 
   type PaymentMethod {
-    id: ID!
+    _id: ID!
     title: String!
-    description: String
     createdAt: String
-  }
-
-  input PaymentMethodInput {
-    id: ID!
-    title: String!,
     description: String
+    updatedAt: String
   }
 `

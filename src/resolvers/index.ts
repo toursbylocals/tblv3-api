@@ -1,25 +1,22 @@
-import { PaymentMethod, Resolvers } from 'src/types';
-import { getUser } from '../models/user';
-import { getPaymentMethod, createPaymentMethod } from '../models/paymentMethod';
+import { PaymentMethod, Resolvers, User } from 'src/types'
+import { getUser } from './user'
+import { createPaymentMethod, getPaymentMethods } from './paymentMethod'
 
 export const resolvers: Resolvers = {
   Query: {
-    //@ts-ignore
     me: (_, { userInput }) => {
-      return getUser(userInput);
+      return getUser(userInput)
     },
-    //@ts-ignore
-    getPaymentMethod: (_, { paymentMethodInput }) => {
-      return getPaymentMethod(paymentMethodInput);
+    paymentMethods: () => {
+      return getPaymentMethods()
     }
   },
+
   Mutation: {
-    //@ts-ignore 
-    createPaymentMethod: (_, { paymentMethodInput }) => {
-      return createPaymentMethod(paymentMethodInput);
+    createPaymentMethod: (_, { paymentMethodName }) => {
+      return createPaymentMethod(paymentMethodName)
     }
   }
 }
 
 export default resolvers
-

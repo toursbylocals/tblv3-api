@@ -7,7 +7,6 @@ export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K]
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
-
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -24,32 +23,22 @@ export type Mutation = {
 
 
 export type MutationCreatePaymentMethodArgs = {
-  paymentMethodInput: PaymentMethodInput;
+  paymentMethodName: Scalars['String'];
 };
 
 export type PaymentMethod = {
   __typename?: 'PaymentMethod';
+  _id: Scalars['ID'];
   createdAt?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
   title: Scalars['String'];
-};
-
-export type PaymentMethodInput = {
-  description?: InputMaybe<Scalars['String']>;
-  id: Scalars['ID'];
-  title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  getPaymentMethod: PaymentMethod;
   me: User;
-};
-
-
-export type QueryGetPaymentMethodArgs = {
-  paymentMethodInput: PaymentMethodInput;
+  paymentMethods: Array<Maybe<PaymentMethod>>;
 };
 
 
@@ -59,18 +48,19 @@ export type QueryMeArgs = {
 
 export type User = {
   __typename?: 'User';
+  _id: Scalars['ID'];
   createdAt?: Maybe<Scalars['String']>;
   firstName: Scalars['String'];
-  id: Scalars['ID'];
   lastName: Scalars['String'];
   updatedAt?: Maybe<Scalars['String']>;
 };
 
 export type UserInput = {
+  _id: Scalars['ID'];
   firstName: Scalars['String'];
-  id: Scalars['ID'];
   lastName: Scalars['String'];
 };
+
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -144,7 +134,6 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Mutation: ResolverTypeWrapper<{}>;
   PaymentMethod: ResolverTypeWrapper<IPaymentMethodSchema>;
-  PaymentMethodInput: PaymentMethodInput;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<IUserSchema>;
@@ -157,7 +146,6 @@ export type ResolversParentTypes = {
   ID: Scalars['ID'];
   Mutation: {};
   PaymentMethod: IPaymentMethodSchema;
-  PaymentMethodInput: PaymentMethodInput;
   Query: {};
   String: Scalars['String'];
   User: IUserSchema;
@@ -165,26 +153,27 @@ export type ResolversParentTypes = {
 };
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  createPaymentMethod?: Resolver<ResolversTypes['PaymentMethod'], ParentType, ContextType, RequireFields<MutationCreatePaymentMethodArgs, 'paymentMethodInput'>>;
+  createPaymentMethod?: Resolver<ResolversTypes['PaymentMethod'], ParentType, ContextType, RequireFields<MutationCreatePaymentMethodArgs, 'paymentMethodName'>>;
 };
 
 export type PaymentMethodResolvers<ContextType = Context, ParentType extends ResolversParentTypes['PaymentMethod'] = ResolversParentTypes['PaymentMethod']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getPaymentMethod?: Resolver<ResolversTypes['PaymentMethod'], ParentType, ContextType, RequireFields<QueryGetPaymentMethodArgs, 'paymentMethodInput'>>;
   me?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryMeArgs, 'userInput'>>;
+  paymentMethods?: Resolver<Array<Maybe<ResolversTypes['PaymentMethod']>>, ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
