@@ -3,10 +3,16 @@ import { gql } from 'apollo-server-express'
 export default gql`
   schema {
     query: Query
+    mutation: Mutation
   }
 
   type Query {
-    me: User!
+    me(userInput: UserInput!): User!
+    paymentMethods: [PaymentMethod]!
+  }
+
+  type Mutation {
+    createPaymentMethod(paymentMethodName: String!): PaymentMethod!
   }
 
   type User {
@@ -17,7 +23,17 @@ export default gql`
     updatedAt: String
   }
 
-  type Payment {
-    foo: String
+  input UserInput {
+    _id: ID!
+    firstName: String!
+    lastName: String!
+  }
+
+  type PaymentMethod {
+    _id: ID!
+    title: String!
+    createdAt: String
+    description: String
+    updatedAt: String
   }
 `

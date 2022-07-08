@@ -1,13 +1,20 @@
-import { Resolvers, User } from 'src/types'
-import { User as UserMongo } from '../models'
+import { PaymentMethod, Resolvers, User } from 'src/types'
+import { getUser } from './user'
+import { createPaymentMethod, getPaymentMethods } from './paymentMethod'
 
 export const resolvers: Resolvers = {
   Query: {
-    //@ts-ignore
-    me: async () => {
-      const found = await UserMongo.findOne({ firstName: 'Eddie' })
+    me: (_, { userInput }) => {
+      return getUser(userInput)
+    },
+    paymentMethods: () => {
+      return getPaymentMethods()
+    }
+  },
 
-      return found as User
+  Mutation: {
+    createPaymentMethod: (_, { paymentMethodName }) => {
+      return createPaymentMethod(paymentMethodName)
     }
   }
 }
