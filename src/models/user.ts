@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, Types, model } from 'mongoose'
 import { SchemaGlobalConfig } from './globals'
 import { IUserSchema } from '../types/mongoModels'
 
