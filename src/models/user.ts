@@ -1,7 +1,8 @@
 import { Schema, model, Types } from 'mongoose'
 import { SchemaGlobalConfig } from './globals'
 import { IPasswordSchema, IUserSchema } from '../types/mongoModels'
-import { isEmail, isStrongPassword } from 'validator'
+import isEmail from 'validator/lib/isEmail'
+import isStrongPassword from 'validator/lib/isStrongPassword'
 
 export const STATUSES = {
   INACTIVE: 'inactive',
@@ -56,6 +57,10 @@ export const LANGUAGES = {
 export const PasswordSchema = new Schema<IPasswordSchema>({
   app: {
     type: String,
+    enum: {
+      values: ['MARKETPLACE', 'KITCHEN'],
+      message: '{VALUE} is not a supported app.'
+    },
     required: true
   },
   password: {
@@ -63,7 +68,7 @@ export const PasswordSchema = new Schema<IPasswordSchema>({
     required: true,
     validate: {
       validator: (value) => isStrongPassword(value),
-      message: 'This password({value}) is not strong enough.'
+      message: (props) => `This password "${props.value}" is not strong enough.`
     }
   }
 })
@@ -77,7 +82,7 @@ export const UserSchema = new Schema<IUserSchema>(
       required: true,
       validate: [isEmail, 'This email is not valid.']
     },
-    password: [PasswordSchema],
+    passwords: [PasswordSchema],
     squad: [
       {
         squad: {

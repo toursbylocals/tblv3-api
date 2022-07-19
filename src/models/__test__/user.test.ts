@@ -39,16 +39,18 @@ describe('User Model', () => {
     )
   })
 
-  it('should make sure password is strong', () => {
+  it.only('should make sure password is strong', () => {
     const validPw = new User({ password: [{ app: 'MARKETPLACE', password: '@lphA1234!' }] })
-    const invalidPw = new User({ password: [{ app: 'KITCHEN', password: 'foo' }] })
-    var errorValidPw = validPw.validateSync()
-    var errorInvalidPw = invalidPw.validateSync()
-    console.log(errorValidPw!)
-    console.log(errorValidPw!.errors['password[0].passowrd'])
-    console.log(errorInvalidPw!.errors['password[0].passowrd'])
-    // expect(errorValidPw!.errors['password'[0]].message).toBe(true)
-    // expect(errorInvalidPw!.errors['password'[0]].message).toBe('This password is not strong enough.')
+    const invalidPw = new User({ passwords: [{ app: 'KITCHEN', password: 'foo' }] })
+
+    const errorInvalidPw = invalidPw.validateSync()
+    const noErrorCase = validPw.validateSync()
+
+    expect(errorInvalidPw!.errors['passwords.0.password'].message).toBe(
+      'This password "foo" is not strong enough.'
+    )
+
+    expect(noErrorCase!.errors['passwords.0.password']).not.toBeDefined()
   })
 
   it('should make sure email address is valid', () => {

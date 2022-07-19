@@ -18,7 +18,7 @@ export interface IUserSchema {
   firstName: string
   lastName: string
   email: string
-  password: IPasswordSchema[]
+  passwords: IPasswordSchema[]
   squad: ISqaudSchema[]
   status: string
   location: ILocationSchema
