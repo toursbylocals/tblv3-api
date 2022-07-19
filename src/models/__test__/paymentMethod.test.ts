@@ -6,8 +6,6 @@ describe('PaymentMethod Model', () => {
     let paymentMethod = new PaymentMethod({})
     var error = paymentMethod.validateSync()
 
-    expect(error?.message).toEqual(
-      'paymentMethod validation failed: name: Path `name` is required.'
-    )
+    expect(error?.message).toBe('paymentMethod validation failed: name: Path `name` is required.')
   })
 })

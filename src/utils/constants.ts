@@ -5,10 +5,41 @@ export const ENV = {
   PROD: 'production'
 } as const
 
-export const STATUSES = {
-  PUBLIC: 'public',
-  PRIVATE: 'private',
-  UNLISTED: 'unlisted',
+export const SQUADS = {
+  QEM: 'qem',
+  GATOUREX: 'gatourex',
+  GCSTOUREX: 'gcstourex',
+  ACSTOURES: 'acstourex',
+  LOGISTICS: 'logistics',
+  MARKETING: 'marketing',
+  ACCOUNTING: 'accounting',
+  CUSTOMERSUPPORTOPERATIONS: 'customersupportoperations',
+  SUPPLIERSSUPPORTOPERATIONS: 'suppliersupportoperations',
+  AGENTS: 'agents',
+  AFFILIATES: 'affiliates',
+  SUPPLIER: 'supplier',
+  CUSTOMER: 'customer',
+  GUIDEAPPLICANT: 'guideapplicant',
+  ACCOUNTMANAGERS: 'accountmanagers',
+  LEGAL: 'legal',
+  PCA: 'pca',
+  all() {
+    return Object.values(this).filter((status) => typeof status !== 'function')
+  }
+} as const
+
+export const ROLES = {
+  OWNER: 'owner',
+  ADMIN: 'admin',
+  USER: 'user',
+  all() {
+    return Object.values(this).filter((status) => typeof status !== 'function')
+  }
+} as const
+
+export const LANGUAGES = {
+  ENGLISH: 'english',
+  SPANISH: 'spanish',
   all() {
     return Object.values(this).filter((status) => typeof status !== 'function')
   }
