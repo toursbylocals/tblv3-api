@@ -8,26 +8,31 @@ export interface IPasswordSchema {
   password: string
 }
 
-export interface ISqaudSchema {
-  squad: string
+export interface ISquadSchema {
+  name: string
   role: string
+}
+
+export interface IEmailSchema {
+  current: string
+  confirmed: boolean
 }
 
 export interface IUserSchema {
   _id: string
   firstName: string
   lastName: string
-  email: string
+  email: IEmailSchema
   passwords: IPasswordSchema[]
-  squad: ISqaudSchema[]
+  squads: ISquadSchema[]
   status: string
   location: ILocationSchema
-  phone: number
+  phone: string
   lastLogin: Date
   description: string
   createdAt: Date
   updatedAt: Date
-  language: string
+  languages: string[]
 }
 
 export interface IPaymentMethodSchema {

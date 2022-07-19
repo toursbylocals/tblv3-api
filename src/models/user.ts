@@ -1,6 +1,7 @@
-import { Schema, model, Types } from 'mongoose'
+import { Schema, model } from 'mongoose'
 import { SchemaGlobalConfig } from './globals'
-import { IPasswordSchema, IUserSchema } from '../types/mongoModels'
+import { IPasswordSchema, IUserSchema, IEmailSchema, ISquadSchema } from '../types/mongoModels'
+import { SQUADS, ROLES, LANGUAGES } from '../utils/constants'
 import isEmail from 'validator/lib/isEmail'
 import isStrongPassword from 'validator/lib/isStrongPassword'
 
@@ -9,46 +10,6 @@ export const STATUSES = {
   IDLE: 'idle',
   ACTIVE: 'active',
   TERMINATED: 'terminated',
-  all() {
-    return Object.values(this).filter((status) => typeof status !== 'function')
-  }
-} as const
-
-export const SQUADS = {
-  QEM: 'qem',
-  GATOUREX: 'gatourex',
-  GCSTOUREX: 'gcstourex',
-  ACSTOURES: 'acstourex',
-  LOGISTICS: 'logistics',
-  MARKETING: 'marketing',
-  ACCOUNTING: 'accounting',
-  CUSTOMERSUPPORTOPERATIONS: 'customersupportoperations',
-  SUPPLIERSSUPPORTOPERATIONS: 'suppliersupportoperations',
-  AGENTS: 'agents',
-  AFFILIATES: 'affiliates',
-  SUPPLIER: 'supplier',
-  CUSTOMER: 'customer',
-  GUIDEAPPLICANT: 'guideapplicant',
-  ACCOUNTMANAGERS: 'accountmanagers',
-  LEGAL: 'legal',
-  PCA: 'pca',
-  all() {
-    return Object.values(this).filter((status) => typeof status !== 'function')
-  }
-} as const
-
-export const ROLES = {
-  OWNER: 'owner',
-  ADMIN: 'admin',
-  USER: 'user',
-  all() {
-    return Object.values(this).filter((status) => typeof status !== 'function')
-  }
-} as const
-
-export const LANGUAGES = {
-  ENGLISH: 'english',
-  SPANISH: 'spanish',
   all() {
     return Object.values(this).filter((status) => typeof status !== 'function')
   }
@@ -73,47 +34,77 @@ export const PasswordSchema = new Schema<IPasswordSchema>({
   }
 })
 
+const EmailSchema = new Schema<IEmailSchema>({
+  current: {
+    type: String,
+    required: [true, 'Current email is required.'],
+    validate: [isEmail, 'This is not a valid email.']
+  },
+  confirmed: { type: Boolean, default: false }
+})
+
+const SquadSchema = new Schema<ISquadSchema>({
+  name: {
+    type: String,
+    enum: {
+      values: [...SQUADS.all()],
+      message: '{VALUE} is not a valid squad. please check the squad list.'
+    },
+    required: true
+  },
+  role: {
+    type: String,
+    enum: {
+      values: [...ROLES.all()],
+      message: '{VALUE} is not a valid role. (user, admin and etc.)'
+    },
+    required: true
+  }
+})
 export const UserSchema = new Schema<IUserSchema>(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    email: {
-      type: String,
-      required: true,
-      validate: [isEmail, 'This email is not valid.']
+    email: { type: EmailSchema, default: () => ({}) },
+    passwords: {
+      type: [PasswordSchema],
+      validate: {
+        validator: (passwords) => Boolean(passwords.length),
+        message: 'Password is required.'
+      }
     },
-    passwords: [PasswordSchema],
-    squad: [
-      {
-        squad: {
-          type: String,
-          enum: [...SQUADS.all()],
-          required: true
-        },
-        role: {
-          type: String,
-          enum: [...ROLES.all()],
-          default: ROLES.USER,
-          required: true
+    squads: {
+      type: [SquadSchema],
+      validate: {
+        validator: (squads) => Boolean(squads.length),
+        message: (props) => {
+          return `${props.value}User should be part of at least one squad.`
         }
       }
-    ],
+    },
     status: {
       type: String,
-      enum: [...STATUSES.all()],
+      enum: {
+        values: [...STATUSES.all()],
+        message: '{VALUE} is not a supported app.'
+      },
       default: STATUSES.ACTIVE
     },
-    phone: { type: Number, required: true },
+    phone: { type: String, required: true },
     lastLogin: { type: Date, default: null },
     location: {
       city: { type: String, default: null },
       country: { type: String, default: null }
     },
-    description: { type: String, default: null },
-    language: {
+    description: {
       type: String,
+      maxLength: [500, 'Description should be less than 500 chars.'],
+      default: null
+    },
+    languages: {
+      type: [String],
       enum: [...LANGUAGES.all()],
-      default: LANGUAGES.ENGLISH
+      default: [LANGUAGES.ENGLISH]
     }
   },
   SchemaGlobalConfig

@@ -8,14 +8,12 @@ module.exports = {
     '!src/types/*.ts',
     '!src/db/*.ts',
     '!src/index.ts',
-    '!<rootDir>/dist/**/*.{js,jsx}',
     '!src/schemas/*.ts',
     '!src/middleware/index.ts',
     '!src/middleware/rules.ts',
     '!src/resolvers/*.ts',
     '!src/loaders/*.ts',
-    '!src/services/google.ts',
-    '!dist'
+    '!src/services/google.ts'
   ],
   coverageThreshold: {
     global: {

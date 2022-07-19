@@ -1,9 +1,7 @@
-import { passwordStrength } from 'check-password-strength'
+export const getMongooseErrors = (error: any) => (field: string) => {
+  if (!error) {
+    return undefined
+  }
 
-export function isPasswordStrongEnough(password: string): boolean {
-  const STRENGTH_ALLOWED = ['Medium', 'Strong']
-
-  const feedback = passwordStrength(password)
-
-  return STRENGTH_ALLOWED.includes(feedback.value)
+  return error!.errors[field].message
 }
