@@ -16,6 +16,12 @@ export type Scalars = {
   Float: number;
 };
 
+export type Media = {
+  __typename?: 'Media';
+  type?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createPaymentMethod: PaymentMethod;
@@ -132,6 +138,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  Media: ResolverTypeWrapper<Media>;
   Mutation: ResolverTypeWrapper<{}>;
   PaymentMethod: ResolverTypeWrapper<IPaymentMethodSchema>;
   Query: ResolverTypeWrapper<{}>;
@@ -144,12 +151,19 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   ID: Scalars['ID'];
+  Media: Media;
   Mutation: {};
   PaymentMethod: IPaymentMethodSchema;
   Query: {};
   String: Scalars['String'];
   User: IUserSchema;
   UserInput: UserInput;
+};
+
+export type MediaResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Media'] = ResolversParentTypes['Media']> = {
+  type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
@@ -180,6 +194,7 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
 };
 
 export type Resolvers<ContextType = Context> = {
+  Media?: MediaResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   PaymentMethod?: PaymentMethodResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;

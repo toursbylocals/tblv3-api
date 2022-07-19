@@ -44,3 +44,13 @@ export const LANGUAGES = {
     return Object.values(this).filter((status) => typeof status !== 'function')
   }
 } as const
+
+export const MEDIA_SUPPORTED = {
+  MP4: 'mp4',
+  JPEG: 'jpeg',
+  JPG: 'jpg',
+  PNG: 'png',
+  all() {
+    return Object.values(this).filter((status) => typeof status !== 'function')
+  }
+} as const

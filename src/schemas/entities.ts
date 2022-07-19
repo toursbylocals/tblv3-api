@@ -65,4 +65,9 @@ export default gql`
     description: String
     updatedAt: String
   }
+
+  type Media {
+    type: String
+    url: String
+  }
 `
