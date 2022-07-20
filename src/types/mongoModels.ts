@@ -1,3 +1,4 @@
+import { Types } from 'mongoose'
 interface ILocationSchema {
   city: string | null
   country: string | null
@@ -44,4 +45,56 @@ export interface IPaymentMethodSchema {
 export interface IMediaSchema {
   type: string
   url: string
+}
+
+export interface IProductTypeSchema {
+  product: Types.ObjectId
+  customTour: Boolean
+  shareExcursion: Boolean
+  tickets: number
+  transportation: string
+}
+export interface IListingSchema {
+  listingId: Types.ObjectId
+  productType: IProductTypeSchema
+  title: string
+  description: string
+  sellerId: Types.ObjectId
+  price: number
+  addons: [IAddonsSchema]
+  location: string
+  startTime: Date
+  status: string
+  promoCodes: string[]
+  category: string[]
+  trait: string
+  definition: IDefinitionsSchema
+}
+
+export interface IAddonsSchema {
+  addons: Types.ObjectId
+  sellerId: Types.ObjectId
+  rules: Types.ObjectId
+  type: string
+  price: number
+}
+
+export interface IDefinitionsSchema {
+  type: Types.ObjectId
+  stops: Object[]
+  title: string
+  description: string
+  media: string
+}
+
+export interface ITraitSchema {
+  trait: string[]
+}
+
+export interface IStoreCreditSchema {
+  credit: string[]
+}
+
+export interface ICategorySchema {
+  category: string[]
 }
