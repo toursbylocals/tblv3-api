@@ -7,55 +7,11 @@ export default gql`
   }
 
   type Query {
-    me(userInput: UserInput!): User!
     paymentMethods: [PaymentMethod]!
   }
 
   type Mutation {
     createPaymentMethod(paymentMethodName: String!): PaymentMethod!
-  }
-
-  type Location {
-    city: String
-    country: String
-  }
-
-  type Interest {
-    id: ID!
-    name: String!
-  }
-
-  type Squad {
-    squad: String!
-    role: String!
-  }
-
-  type Password {
-    app: String!
-    password: String!
-  }
-
-  type User {
-    _id: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
-    password: [Password]!
-    squad: [Squad]!
-    status: String!
-    location: Location
-    phone: String!
-    lastLogin: String
-    description: String
-    createdAt: String
-    updatedAt: String
-    language: String
-  }
-
-  input UserInput {
-    _id: ID!
-    firstName: String!
-    lastName: String!
   }
 
   type PaymentMethod {
@@ -64,10 +20,5 @@ export default gql`
     createdAt: String
     description: String
     updatedAt: String
-  }
-
-  type Media {
-    type: String
-    url: String
   }
 `
