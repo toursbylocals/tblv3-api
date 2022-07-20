@@ -1,2 +1,1 @@
 # TourByLocals Graphql API
-

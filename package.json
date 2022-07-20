@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "pre-commit": "yarn eslint && yarn prettier --write src && yarn test-ci",
     "start": "node dist/index.js",
     "test-ci": "jest --coverage --ci",
     "dev": "nodemon --exec ts-node src/index.ts",
@@ -58,15 +59,7 @@
       "path": "node_modules/cz-conventional-changelog-emoji"
     }
   },
-  "lint-staged": {
-    "**/*.{ts,tsx}": [
-      "yarn eslint",
-      "yarn prettier --write",
-      "yarn test-ci"
-    ]
-  },
   "dependencies": {
-   
     "apollo-server-express": "^3.9.0",
     "express": "4.17.1",
     "graphql": "^16.5.0",
