@@ -17,7 +17,6 @@ export interface IEmailSchema {
   current: string
   confirmed: boolean
 }
-
 export interface IUserSchema {
   _id: string
   firstName: string
@@ -41,4 +40,8 @@ export interface IPaymentMethodSchema {
   createdAt: string
   description: string
   updatedAt: string
+}
+export interface IMediaSchema {
+  type: string
+  url: string
 }
