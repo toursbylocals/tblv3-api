@@ -1,3 +1,5 @@
 export { default as User } from './user'
 export { default as PaymentMethod } from './paymentMethod'
 export { default as Shared } from './shared'
+export { default as Subscriptions } from './subscriptions'
+export { default as Supplier } from './supplier'
