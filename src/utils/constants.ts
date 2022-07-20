@@ -54,3 +54,21 @@ export const MEDIA_SUPPORTED = {
     return Object.values(this).filter((status) => typeof status !== 'function')
   }
 } as const
+
+export const BOOKING_STATUSES = {
+  CANCELED: 'canceled',
+  COMPLETED: 'completed',
+  PENDING: 'pending',
+  NOT_RESPONDED: 'not responded',
+  all() {
+    return Object.values(this).filter((status) => typeof status !== 'function')
+  }
+} as const
+
+export const CATEGORIES = {
+  TOUR: 'tour',
+  SHORE_EX: 'shore ex',
+  all() {
+    return Object.values(this).filter((status) => typeof status !== 'function')
+  }
+} as const

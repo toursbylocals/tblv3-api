@@ -14,8 +14,8 @@
     "prepare": "husky install",
     "c": "yarn commit --no-verify",
     "amend": "git commit --amend --no-verify --no-edit",
-    "lint": "prettier --check .",
-    "format": "prettier --write .",
+    "lint": "prettier --check src",
+    "format": "prettier --write src",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "repository": {
