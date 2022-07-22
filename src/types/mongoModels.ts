@@ -79,28 +79,38 @@ export interface IPaymentMethod {
   createdAt: string
 }
 
-export interface IListing {
-  listingId: ObjectId
+export interface IListingSchema {
+  _id: ObjectId
   productType: string
   title: string
   description: string
+  supplierId: ObjectId
+  price: number
+  addons: IAddons[]
+  location: ILocation
+  startTime: Date
+  status: string
+  promoCodes: string[]
+  category: string[]
+  trait: string[]
 }
 
-// export interface IAddonsSchema {
-//   addons: ObjectId
-//   sellerId: ObjectId
-//   rules: ObjectId
-//   type: string
-//   price: number
-// }
+export interface ILocation {
+  country: string
+  city: string
+}
 
-// export interface IDefinitionsSchema {
-//   type: ObjectId
-//   stops: Object[]
-//   title: string
-//   description: string
-//   updatedAt: string
-// }
+export interface IAddons {
+  supplierId: ObjectId
+  rule: IRule
+  type: string
+  price: number
+}
+
+export interface IRule {
+  type: string
+  value: number
+}
 
 export type IRatingType = {
   zero: number
