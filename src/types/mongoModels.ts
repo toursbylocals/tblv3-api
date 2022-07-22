@@ -73,13 +73,34 @@ type IPayoutMethod = {
   method: string
   fields: IPayoutInputsType[]
 }
-export interface IPaymentMethodSchema {
+export interface IPaymentMethod {
   _id: ObjectId
   name: string
   createdAt: string
-  description: string
-  updatedAt: string
 }
+
+export interface IListing {
+  listingId: ObjectId
+  productType: string
+  title: string
+  description: string
+}
+
+// export interface IAddonsSchema {
+//   addons: ObjectId
+//   sellerId: ObjectId
+//   rules: ObjectId
+//   type: string
+//   price: number
+// }
+
+// export interface IDefinitionsSchema {
+//   type: ObjectId
+//   stops: Object[]
+//   title: string
+//   description: string
+//   updatedAt: string
+// }
 
 export type IRatingType = {
   zero: number
