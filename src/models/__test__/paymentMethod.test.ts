@@ -1,11 +1,12 @@
-import { Types } from 'mongoose'
 import PaymentMethod from '../paymentMethod'
+import { getMongooseErrors } from '../../utils'
 
 describe('PaymentMethod Model', () => {
-  it('should throw an error if name is not provided', () => {
+  it('should provide the name of payment method', () => {
     let paymentMethod = new PaymentMethod({})
-    var error = paymentMethod.validateSync()
 
-    expect(error?.message).toBe('paymentMethod validation failed: name: Path `name` is required.')
+    let error = paymentMethod.validateSync()
+    let withCurrentError = getMongooseErrors(error)
+    expect(withCurrentError('name')).toBe('Payment method is required.')
   })
 })
