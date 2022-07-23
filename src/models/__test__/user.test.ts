@@ -106,4 +106,7 @@ describe('User Model', () => {
 
     expect(withErrors('squads')).toBe('User should be part of at least one squad.')
   })
+
+  it('should make sure account email is unique', () => {})
+  it('should make sure account phone number is unique', () => {})
 })
